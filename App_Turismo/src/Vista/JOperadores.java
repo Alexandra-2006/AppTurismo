@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class JOperadores extends JFrame {
 
@@ -28,7 +29,10 @@ public class JOperadores extends JFrame {
 	private JTextField txtNumeroDocumento;
 	private JTextField txtTelefono;
 	private JLabel lblNewLabel_4;
-
+	private JLabel lblNewLabel_8;
+	private JTextField txtIdOperadores;
+	private JButton btnNewButton;
+	Operadores cr = new Operadores();
 	/**
 	 * Launch the application.
 	 */
@@ -128,13 +132,12 @@ public class JOperadores extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				Operadores cr = new Operadores();
-				cr.create(txtTipoDocumento.getText(),Integer.parseInt(txtNumeroDocumento.getText()), txtNombres.getText(),txtApellidos.getText(),txtDireccion.getText(), txtCorreo.getText(),txtTelefono.getText()
-					);
+				
+				cr.create(txtTipoDocumento.getText(),Integer.parseInt(txtNumeroDocumento.getText()), txtNombres.getText(),txtApellidos.getText(),txtDireccion.getText(), txtCorreo.getText(),txtTelefono.getText());
 				
 			}
 		});
-		btnGuardar.setBounds(112, 469, 89, 23);
+		btnGuardar.setBounds(62, 427, 89, 23);
 		contentPane.add(btnGuardar);
 		
 		
@@ -143,6 +146,27 @@ public class JOperadores extends JFrame {
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel_4.setBounds(115, 11, 201, 31);
 		contentPane.add(lblNewLabel_4);
+		
+		lblNewLabel_8 = new JLabel("Id Operadores");
+		lblNewLabel_8.setBounds(89, 381, 158, 14);
+		contentPane.add(lblNewLabel_8);
+		
+		txtIdOperadores = new JTextField();
+		txtIdOperadores.setBounds(257, 381, 86, 20);
+		contentPane.add(txtIdOperadores);
+		txtIdOperadores.setColumns(10);
+		
+		btnNewButton = new JButton("New button");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				 cr.delete(Integer.parseInt(txtIdOperadores.getText()));	
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666597_trash_2_icon.png"));
+		btnNewButton.setBounds(257, 443, 89, 49);
+		contentPane.add(btnNewButton);
 		
 		
 		

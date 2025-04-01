@@ -159,7 +159,34 @@ public class Paquetes {
 			
 			System.out.println(e.getMessage());
 		}
+	}
+    public void delete(int codigo ) {
+		Connection dbConnection = null;
+		PreparedStatement pst = null; // Preparar la trx
+
+		String scrip = "DELETE FROM tblpaquetes WHERE codigo = ?";
+		try {
+
+			dbConnection = conector.conectarBD(); // Abrir La Conexion
+			pst = dbConnection.prepareStatement(scrip);// Abrir el Buffer
+
+			// Parametrizar el campo
+			pst.setInt(1,codigo  );
+
+			// Confirmar la operacion
+			int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + codigo + "?");
+
+			if (resp == JOptionPane.OK_OPTION) {
+				// Ejecutar la Trx
+				pst.executeUpdate();
+				JOptionPane.showConfirmDialog(null, "Registro No. " + codigo + "Eliminado");
+			}
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+		}
 	
 	
-	
-}}
+}
+    }

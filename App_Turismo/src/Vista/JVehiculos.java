@@ -16,6 +16,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class JVehiculos extends JFrame {
 
@@ -30,7 +32,8 @@ public class JVehiculos extends JFrame {
 	private JTextField txtPlaca;
 	private JTextField txtEstado;
 	private JTextField txtCategoria;
-
+	private JTextField txtIdVehiculo;
+	Vehiculos cr = new Vehiculos();
 	/**
 	 * Launch the application.
 	 */
@@ -90,7 +93,7 @@ public class JVehiculos extends JFrame {
 		txtNumeroMotor.setColumns(10);
 		
 		txtPlaca = new JTextField();
-		txtPlaca.setBounds(254, 409, 86, 20);
+		txtPlaca.setBounds(254, 394, 86, 20);
 		contentPane.add(txtPlaca);
 		txtPlaca.setColumns(10);
 		
@@ -119,7 +122,7 @@ public class JVehiculos extends JFrame {
 		contentPane.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Placa");
-		lblNewLabel_6.setBounds(97, 412, 46, 14);
+		lblNewLabel_6.setBounds(107, 397, 46, 14);
 		contentPane.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Gestión de Vehículos");
@@ -137,13 +140,13 @@ public class JVehiculos extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				Vehiculos cr = new Vehiculos();
+				
 				
 				cr.create(txtPlaca.getText(),txtMarca.getText(), Integer.parseInt(txtAño.getText()), txtNumeroMotor.getText(),  Integer.parseInt(txtCapacidad.getText()),  txtModelo.getText(), txtEstado.getText(),  Integer.parseInt(txtId_Transporte.getText()), txtCategoria.getText());
 				
 			}
 		});
-		btnNewButton.setBounds(180, 524, 89, 23);
+		btnNewButton.setBounds(83, 541, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel_8 = new JLabel("Estado");
@@ -156,12 +159,35 @@ public class JVehiculos extends JFrame {
 		txtEstado.setColumns(10);
 		
 		JLabel lblNewLabel_9 = new JLabel("Categoría");
-		lblNewLabel_9.setBounds(97, 459, 100, 14);
+		lblNewLabel_9.setBounds(97, 447, 100, 14);
 		contentPane.add(lblNewLabel_9);
 		
 		txtCategoria = new JTextField();
-		txtCategoria.setBounds(257, 456, 86, 20);
+		txtCategoria.setBounds(254, 444, 86, 20);
 		contentPane.add(txtCategoria);
 		txtCategoria.setColumns(10);
+		
+		JLabel lblNewLabel_10 = new JLabel("Id Vehículo");
+		lblNewLabel_10.setBounds(90, 483, 126, 14);
+		contentPane.add(lblNewLabel_10);
+		
+		txtIdVehiculo = new JTextField();
+		txtIdVehiculo.setBounds(221, 475, 86, 20);
+		contentPane.add(txtIdVehiculo);
+		txtIdVehiculo.setColumns(10);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				cr.delete(Integer.parseInt(txtIdVehiculo.getText()));
+			}
+		});
+		btnNewButton_1.setForeground(new Color(255, 255, 0));
+		btnNewButton_1.setBackground(new Color(255, 255, 0));
+		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666597_trash_2_icon.png"));
+		btnNewButton_1.setBounds(265, 506, 89, 58);
+		contentPane.add(btnNewButton_1);
 	}
 }

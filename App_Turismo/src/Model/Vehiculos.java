@@ -128,4 +128,36 @@ public class Vehiculos {
 			System.out.println(e.getMessage());
 		}
 	
-	}}
+	}
+
+
+public void delete(int Id_Vehiculo) {
+	Connection dbConnection = null;
+	PreparedStatement pst = null; // Preparar la trx
+
+	String scrip = "DELETE FROM tblvehiculos WHERE Id_Vehiculo = ?";
+	try {
+
+		dbConnection = conector.conectarBD(); // Abrir La Conexion
+		pst = dbConnection.prepareStatement(scrip);// Abrir el Buffer
+
+		// Parametrizar el campo
+		pst.setInt(1, Id_Vehiculo);
+
+		// Confirmar la operacion
+		int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + Id_Vehiculo + "?");
+
+		if (resp == JOptionPane.OK_OPTION) {
+			// Ejecutar la Trx
+			pst.executeUpdate();
+			JOptionPane.showConfirmDialog(null, "Registro No. " + Id_Vehiculo + "Eliminado");
+		}
+
+	} catch (SQLException e) {
+
+		System.out.println(e.getMessage());
+	}
+
+}	
+
+}

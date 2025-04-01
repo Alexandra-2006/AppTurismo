@@ -114,4 +114,33 @@ public class Operadores {
 				
 				System.out.println(e.getMessage());
 			}
-}}
+}
+	
+	public void delete(int idOperador ) {
+		Connection dbConnection = null;
+		PreparedStatement pst = null; // Preparar la trx
+
+		String scrip = "DELETE FROM tbloperadores WHERE idOperador = ?";
+		try {
+
+			dbConnection = conector.conectarBD(); // Abrir La Conexion
+			pst = dbConnection.prepareStatement(scrip);// Abrir el Buffer
+
+			// Parametrizar el campo
+			pst.setInt(1,idOperador  );
+
+			// Confirmar la operacion
+			int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + idOperador + "?");
+
+			if (resp == JOptionPane.OK_OPTION) {
+				// Ejecutar la Trx
+				pst.executeUpdate();
+				JOptionPane.showConfirmDialog(null, "Registro No. " + idOperador + "Eliminado");
+			}
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+		}
+	}
+	}

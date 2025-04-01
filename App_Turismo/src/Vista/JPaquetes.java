@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class JPaquetes extends JFrame {
 
@@ -35,7 +36,9 @@ public class JPaquetes extends JFrame {
 	private JTextField txtObservaciones;
 	private JTextField txtPrecio;
 	private JTextField txtIdClientes;
-
+	private JTextField txtCodigo;
+	Paquetes cr = new Paquetes ();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -123,7 +126,7 @@ public class JPaquetes extends JFrame {
 		txtObservaciones.setColumns(10);
 		
 		txtPrecio = new JTextField();
-		txtPrecio.setBounds(205, 507, 86, 20);
+		txtPrecio.setBounds(30, 526, 86, 20);
 		contentPane.add(txtPrecio);
 		txtPrecio.setColumns(10);
 		
@@ -176,7 +179,7 @@ public class JPaquetes extends JFrame {
 		contentPane.add(lblNewLabel_13);
 		
 		JLabel lblNewLabel_14 = new JLabel("Precio");
-		lblNewLabel_14.setBounds(217, 482, 75, 14);
+		lblNewLabel_14.setBounds(41, 486, 75, 14);
 		contentPane.add(lblNewLabel_14);
 		
 		JButton btnGuardar = new JButton("Guardar");
@@ -184,7 +187,6 @@ public class JPaquetes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				Paquetes cr = new Paquetes ();
 				
 			cr.create(Integer.parseInt(txtId_Destino.getText()), Integer.parseInt(txtId_Origen.getText()), txtFechaVenta.getText(), txtHoraVenta.getText(), txtHoraSalida.getText(), txtFechaEjecucion.getText(),
 					txtObservaciones.getText(), Integer.parseInt(txtId_Medios.getText()), Integer.parseInt(txtId_Agencias.getText()), Integer.parseInt(txtIdClientes.getText()), Integer.parseInt(txtIdPromotores.getText()),
@@ -196,7 +198,7 @@ public class JPaquetes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnGuardar.setBounds(166, 601, 89, 23);
+		btnGuardar.setBounds(45, 606, 89, 23);
 		contentPane.add(btnGuardar);
 		
 		JLabel lblNewLabel = new JLabel("Gestión de Paquetes");
@@ -212,5 +214,26 @@ public class JPaquetes extends JFrame {
 		JLabel lblNewLabel_15 = new JLabel("IdClientes");
 		lblNewLabel_15.setBounds(325, 239, 86, 14);
 		contentPane.add(lblNewLabel_15);
+		
+		JLabel lblNewLabel_11 = new JLabel("Código");
+		lblNewLabel_11.setBounds(279, 500, 46, 14);
+		contentPane.add(lblNewLabel_11);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setBounds(253, 526, 86, 20);
+		contentPane.add(txtCodigo);
+		txtCodigo.setColumns(10);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				 cr.delete(Integer.parseInt(txtCodigo.getText()));	
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666597_trash_2_icon.png"));
+		btnNewButton.setBounds(263, 575, 89, 50);
+		contentPane.add(btnNewButton);
 	}
 }

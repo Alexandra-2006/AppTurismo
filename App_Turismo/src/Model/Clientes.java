@@ -130,9 +130,36 @@ public class Clientes {
 			
 			System.out.println(e.getMessage());
 		}
-		
+    
 	}
 	
+	public void delete(int IdClientes ) {
+		Connection dbConnection = null;
+		PreparedStatement pst = null; // Preparar la trx
+
+		String scrip = "DELETE FROM tblclientes WHERE IdClientes = ?";
+		try {
+
+			dbConnection = conector.conectarBD(); // Abrir La Conexion
+			pst = dbConnection.prepareStatement(scrip);// Abrir el Buffer
+
+			// Parametrizar el campo
+			pst.setInt(1,IdClientes  );
+
+			// Confirmar la operacion
+			int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + IdClientes + "?");
+
+			if (resp == JOptionPane.OK_OPTION) {
+				// Ejecutar la Trx
+				pst.executeUpdate();
+				JOptionPane.showConfirmDialog(null, "Registro No. " + IdClientes + "Eliminado");
+			}
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+		}
+	}
 
 }
 	

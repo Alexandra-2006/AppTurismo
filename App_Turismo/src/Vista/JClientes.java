@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class JClientes extends JFrame {
 
@@ -33,7 +34,8 @@ public class JClientes extends JFrame {
 	private JTextField txtestadocivil;
 	private JButton btnGuardar;
 	private JTextField txtTipoDocumento;
-
+	private JTextField txtIdClientes;
+	Clientes cr = new Clientes ();
 	/**
 	 * Launch the application.
 	 */
@@ -103,12 +105,12 @@ public class JClientes extends JFrame {
 		txteps.setColumns(10);
 		
 		txtAlergias = new JTextField();
-		txtAlergias.setBounds(158, 417, 86, 20);
+		txtAlergias.setBounds(39, 393, 86, 20);
 		contentPane.add(txtAlergias);
 		txtAlergias.setColumns(10);
 		
 		txtestadocivil = new JTextField();
-		txtestadocivil.setBounds(407, 443, 86, 20);
+		txtestadocivil.setBounds(272, 407, 86, 20);
 		contentPane.add(txtestadocivil);
 		txtestadocivil.setColumns(10);
 		
@@ -145,11 +147,11 @@ public class JClientes extends JFrame {
 		contentPane.add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_9 = new JLabel("Alergias");
-		lblNewLabel_9.setBounds(169, 397, 75, 14);
+		lblNewLabel_9.setBounds(52, 368, 75, 14);
 		contentPane.add(lblNewLabel_9);
 		
 		JLabel lblNewLabel_10 = new JLabel("Estado Civíl");
-		lblNewLabel_10.setBounds(422, 397, 86, 14);
+		lblNewLabel_10.setBounds(272, 382, 86, 14);
 		contentPane.add(lblNewLabel_10);
 		
 		btnGuardar = new JButton("Guardar");
@@ -157,7 +159,7 @@ public class JClientes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				Clientes cr = new Clientes ();
+			
 				cr.create(txtTipoDocumento.getText(), Integer.parseInt(txtNumeroDocumento.getText()) ,  txtNombres.getText(), txtApellidos.getText(), txtTelefono.getText(), txtCorreo.getText(), txtDireccion.getText(),
 						txteps.getText(), txtAlergias.getText(), txtestadocivil.getText());
 			}
@@ -166,7 +168,7 @@ public class JClientes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnGuardar.setBounds(271, 502, 89, 23);
+		btnGuardar.setBounds(279, 502, 89, 23);
 		contentPane.add(btnGuardar);
 		
 		JLabel lblNewLabel_11 = new JLabel("Gestión de Clientes");
@@ -178,5 +180,25 @@ public class JClientes extends JFrame {
 		txtTipoDocumento.setBounds(129, 99, 86, 20);
 		contentPane.add(txtTipoDocumento);
 		txtTipoDocumento.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Id Clientes");
+		lblNewLabel.setBounds(487, 382, 100, 14);
+		contentPane.add(lblNewLabel);
+		
+		txtIdClientes = new JTextField();
+		txtIdClientes.setBounds(468, 407, 86, 20);
+		contentPane.add(txtIdClientes);
+		txtIdClientes.setColumns(10);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.delete(Integer.parseInt(txtIdClientes.getText()));
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666597_trash_2_icon.png"));
+		btnNewButton.setBounds(479, 463, 89, 57);
+		contentPane.add(btnNewButton);
 	}
 }

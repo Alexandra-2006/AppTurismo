@@ -19,6 +19,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class JAgencias extends JFrame {
 
@@ -35,7 +36,9 @@ public class JAgencias extends JFrame {
 	private JLabel lblNewLabel_5;
 	private JTextField txtIdCompañia;
 	private JTextField txtCorreo;
-
+	private JLabel lblNewLabel_7;
+	private JTextField txtIdAgencias;
+	Agencias cr = new Agencias ();
 	/**
 	 * Launch the application.
 	 */
@@ -58,8 +61,10 @@ public class JAgencias extends JFrame {
 	public JAgencias() {
 		setTitle("AGENCIAS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 457);
+		setBounds(100, 100, 450, 615);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(135, 206, 235));
+		contentPane.setForeground(new Color(245, 255, 250));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -76,12 +81,12 @@ public class JAgencias extends JFrame {
 		txtDirección.setColumns(10);
 		
 		txtTelefono = new JTextField();
-		txtTelefono.setBounds(234, 155, 200, 20);
+		txtTelefono.setBounds(234, 70, 200, 20);
 		contentPane.add(txtTelefono);
 		txtTelefono.setColumns(10);
 		
 		txtWeb = new JTextField();
-		txtWeb.setBounds(257, 279, 167, 20);
+		txtWeb.setBounds(29, 254, 167, 20);
 		contentPane.add(txtWeb);
 		txtWeb.setColumns(10);
 		
@@ -94,15 +99,15 @@ public class JAgencias extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		lblNewLabel_3 = new JLabel("Teléfono");
-		lblNewLabel_3.setBounds(294, 130, 71, 14);
+		lblNewLabel_3.setBounds(296, 45, 71, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		lblNewLabel_4 = new JLabel("Correo");
-		lblNewLabel_4.setBounds(70, 247, 46, 14);
+		lblNewLabel_4.setBounds(321, 130, 46, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		lblNewLabel_5 = new JLabel("Web");
-		lblNewLabel_5.setBounds(319, 247, 46, 14);
+		lblNewLabel_5.setBounds(70, 229, 46, 14);
 		contentPane.add(lblNewLabel_5);
 		
 		JButton btnGuardar = new JButton("Guardar");
@@ -110,7 +115,7 @@ public class JAgencias extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				Agencias cr = new Agencias ();
+				
 				cr.create(txtNombre.getText(), txtDirección.getText(), txtTelefono.getText(),txtCorreo.getText(), txtWeb.getText(), Integer.parseInt(txtIdCompañia.getText()));
 				
 			}
@@ -119,7 +124,7 @@ public class JAgencias extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnGuardar.setBounds(307, 359, 89, 33);
+		btnGuardar.setBounds(86, 360, 89, 33);
 		contentPane.add(btnGuardar);
 		
 		JLabel lblNewLabel_6 = new JLabel("Gestión de Agencias");
@@ -129,17 +134,40 @@ public class JAgencias extends JFrame {
 		contentPane.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel = new JLabel("IdCompañia");
-		lblNewLabel.setBounds(29, 336, 123, 14);
+		lblNewLabel.setBounds(287, 229, 123, 14);
 		contentPane.add(lblNewLabel);
 		
 		txtIdCompañia = new JTextField();
-		txtIdCompañia.setBounds(10, 365, 86, 20);
+		txtIdCompañia.setBounds(257, 254, 153, 20);
 		contentPane.add(txtIdCompañia);
 		txtIdCompañia.setColumns(10);
 		
 		txtCorreo = new JTextField();
-		txtCorreo.setBounds(53, 279, 86, 20);
+		txtCorreo.setBounds(257, 155, 153, 20);
 		contentPane.add(txtCorreo);
 		txtCorreo.setColumns(10);
+		
+		lblNewLabel_7 = new JLabel("Id Agencias");
+		lblNewLabel_7.setBounds(284, 313, 97, 14);
+		contentPane.add(lblNewLabel_7);
+		
+		txtIdAgencias = new JTextField();
+		txtIdAgencias.setBounds(281, 338, 86, 20);
+		contentPane.add(txtIdAgencias);
+		txtIdAgencias.setColumns(10);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setForeground(new Color(30, 144, 255));
+		btnNewButton.setBackground(new Color(0, 0, 205));
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			cr.delete(Integer.parseInt(txtIdAgencias.getText()));	
+				
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666597_trash_2_icon.png"));
+		btnNewButton.setBounds(268, 433, 89, 63);
+		contentPane.add(btnNewButton);
 	}
 }

@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class JMedios extends JFrame {
 
@@ -23,6 +24,8 @@ public class JMedios extends JFrame {
 	private JTextField txtNombres;
 	private JTextField txtObservaciones;
 	private JTextField txtIdTiposMedios;
+	private JTextField txtIdMedios;
+	Medios cr = new Medios();
 
 	/**
 	 * Launch the application.
@@ -46,7 +49,7 @@ public class JMedios extends JFrame {
 	public JMedios() {
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 529);
 		contentPane = new JPanel();
 		contentPane.addMouseListener(new MouseAdapter() {
 			
@@ -70,7 +73,7 @@ public class JMedios extends JFrame {
 		txtObservaciones.setColumns(10);
 		
 		txtIdTiposMedios = new JTextField();
-		txtIdTiposMedios.setBounds(158, 230, 86, 20);
+		txtIdTiposMedios.setBounds(58, 272, 86, 20);
 		contentPane.add(txtIdTiposMedios);
 		txtIdTiposMedios.setColumns(10);
 		
@@ -83,7 +86,7 @@ public class JMedios extends JFrame {
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_1 = new JLabel("Id Tipos Medios");
-		lblNewLabel_1.setBounds(20, 233, 111, 14);
+		lblNewLabel_1.setBounds(58, 236, 111, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		
@@ -92,15 +95,15 @@ public class JMedios extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				Medios cr = new Medios();
+				
 				cr.create (txtNombres.getText(), txtObservaciones.getText(),  Integer.parseInt((txtIdTiposMedios.getText())));
 			}
 		});
-		btnRegistrar.setBounds(259, 166, 89, 23);
+		btnRegistrar.setBounds(131, 342, 89, 23);
 		contentPane.add(btnRegistrar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(259, 114, 89, 23);
+		btnCancelar.setBounds(10, 342, 89, 23);
 		contentPane.add(btnCancelar);
 		
 		JLabel lblNewLabel = new JLabel("Gestión de Medios");
@@ -108,8 +111,28 @@ public class JMedios extends JFrame {
 		lblNewLabel.setBounds(155, 11, 148, 14);
 		contentPane.add(lblNewLabel);
 		
+		JLabel lblNewLabel_4 = new JLabel("Id Medios");
+		lblNewLabel_4.setBounds(307, 236, 46, 14);
+		contentPane.add(lblNewLabel_4);
 		
+		txtIdMedios = new JTextField();
+		txtIdMedios.setBounds(290, 261, 86, 20);
+		contentPane.add(txtIdMedios);
+		txtIdMedios.setColumns(10);
 		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				 cr.delete(Integer.parseInt(txtIdMedios.getText()));	
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666597_trash_2_icon.png"));
+		btnNewButton.setBounds(300, 366, 89, 57);
+		contentPane.add(btnNewButton);
+		
+
 		
 	}
 }

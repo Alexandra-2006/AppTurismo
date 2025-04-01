@@ -1,5 +1,13 @@
 package Model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
+import Controller.Conexion;
+
 public class Promotor {
 	
 	 public int idPromotores = 0;
@@ -12,19 +20,12 @@ public class Promotor {
 	 public String fechanacimiento = "";
 	 public String Alergias = "";
 	 
-	public Promotor(int idPromotores, String tipoIdentificacion, int numeroIdentificacion, String nombres,
-			String apellidos, String correos, String telefono, String fechanacimiento, String alergias) {
-		super();
-		this.idPromotores = idPromotores;
-		this.TipoIdentificacion = tipoIdentificacion;
-		this.NumeroIdentificacion = numeroIdentificacion;
-		this.Nombres = nombres;
-		this.Apellidos = apellidos;
-		this.Correos = correos;
-		this.Telefono = telefono;
-		this.fechanacimiento = fechanacimiento;
-		this.Alergias = alergias;
-	}
+	 
+	 
+	 Conexion conector = new Conexion();
+		
+	 
+	
 	public int getIdPromotores() {
 		return idPromotores;
 	}
@@ -81,4 +82,67 @@ public class Promotor {
 	}
 	
 	
+
+	public void create ( String   TipoIdentificacion , int  NumeroIdentificacion , String   Nombres, String  Apellidos,String Correo, String Telefono,String fechanacimiento, String Alergias) {
+		
+		Connection dbConnection = null;
+		PreparedStatement pst = null;
+		
+		String scrip = "INSERT INTO tblpromotor ( TipoIdentificacion, NumeroIdentificacion, Nombres, Apellidos, Correo, Telefono, fechanacimiento,Alergias) values (?,?,?,?,?,?,?,?)";
+
+    try {
+			
+			dbConnection = conector.conectarBD();
+			pst = dbConnection.prepareStatement(scrip);
+		
+			pst.setString(1, TipoIdentificacion);
+			pst.setInt(2,NumeroIdentificacion );
+			pst.setString(3,Nombres );
+			pst.setString(4,Apellidos );
+			pst.setString(5,Correo );
+			pst.setString(6,Telefono );
+			pst.setString(7,fechanacimiento );
+			pst.setString(8,Alergias );
+			
+			pst.executeUpdate();
+			
+			JOptionPane.showConfirmDialog(null, "Registro con éxito");
+		}catch(SQLException e) {
+			
+			System.out.println(e.getMessage());
+		}
+	
+	
 }
+	
+	
+	
+
+public void delete(int idPromotores ) {
+	Connection dbConnection = null;
+	PreparedStatement pst = null; // Preparar la trx
+
+	String scrip = "DELETE FROM tblpromotor WHERE idPromotores = ?";
+	try {
+
+		dbConnection = conector.conectarBD(); // Abrir La Conexion
+		pst = dbConnection.prepareStatement(scrip);// Abrir el Buffer
+
+		// Parametrizar el campo
+		pst.setInt(1,idPromotores  );
+
+		// Confirmar la operacion
+		int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + idPromotores + "?");
+
+		if (resp == JOptionPane.OK_OPTION) {
+			// Ejecutar la Trx
+			pst.executeUpdate();
+			JOptionPane.showConfirmDialog(null, "Registro No. " + idPromotores + "Eliminado");
+		}
+
+	} catch (SQLException e) {
+
+		System.out.println(e.getMessage());
+	}
+
+}}

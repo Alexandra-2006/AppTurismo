@@ -5,12 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Model.Promotor;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class JPromotor extends JFrame {
 
@@ -22,9 +26,10 @@ public class JPromotor extends JFrame {
 	private JTextField txtTipoIdentificación;
 	private JTextField txtNumeroIdentificacion;
 	private JTextField txtTelefono;
-	private JTextField Correo;
+	private JTextField txtCorreo;
 	private JTextField txtAlergias;
-
+	private JTextField txtIdPromotor;
+	Promotor cr = new Promotor();
 	/**
 	 * Launch the application.
 	 */
@@ -69,15 +74,15 @@ public class JPromotor extends JFrame {
 		txtFechaNacimiento.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Nombres");
-		lblNewLabel.setBounds(98, 49, 46, 14);
+		lblNewLabel.setBounds(80, 49, 117, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Apellidos");
-		lblNewLabel_1.setBounds(80, 92, 46, 14);
+		lblNewLabel_1.setBounds(80, 92, 89, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Fecha de Nacimiento");
-		lblNewLabel_2.setBounds(60, 149, 109, 14);
+		lblNewLabel_2.setBounds(60, 149, 149, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		txtTipoIdentificación = new JTextField();
@@ -86,7 +91,7 @@ public class JPromotor extends JFrame {
 		txtTipoIdentificación.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Tipo de identificación");
-		lblNewLabel_3.setBounds(41, 206, 127, 17);
+		lblNewLabel_3.setBounds(41, 206, 168, 17);
 		contentPane.add(lblNewLabel_3);
 		
 		txtNumeroIdentificacion = new JTextField();
@@ -107,37 +112,66 @@ public class JPromotor extends JFrame {
 		lblNewLabel_5.setBounds(62, 321, 107, 14);
 		contentPane.add(lblNewLabel_5);
 		
-		Correo = new JTextField();
-		Correo.setBounds(250, 373, 86, 20);
-		contentPane.add(Correo);
-		Correo.setColumns(10);
+		txtCorreo = new JTextField();
+		txtCorreo.setBounds(250, 362, 86, 20);
+		contentPane.add(txtCorreo);
+		txtCorreo.setColumns(10);
 		
 		JLabel lblNewLabel_6 = new JLabel("Correo");
-		lblNewLabel_6.setBounds(60, 373, 46, 14);
+		lblNewLabel_6.setBounds(60, 365, 46, 14);
 		contentPane.add(lblNewLabel_6);
 		
 		txtAlergias = new JTextField();
-		txtAlergias.setBounds(250, 431, 86, 20);
+		txtAlergias.setBounds(250, 404, 86, 20);
 		contentPane.add(txtAlergias);
 		txtAlergias.setColumns(10);
 		
 		JLabel lblNewLabel_7 = new JLabel("Alergias");
-		lblNewLabel_7.setBounds(60, 434, 66, 14);
+		lblNewLabel_7.setBounds(60, 407, 66, 14);
 		contentPane.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("Gestión de Promotores");
 		lblNewLabel_8.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
+		
 		});
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel_8.setBounds(105, 0, 217, 14);
 		contentPane.add(lblNewLabel_8);
 		
 		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setBounds(138, 488, 89, 23);
+		btnGuardar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+				cr.create(txtTipoIdentificación.getText(), Integer.parseInt(txtNumeroIdentificacion.getText()), txtNombres.getText(), txtApellidos.getText(), txtCorreo.getText(), txtTelefono.getText(), txtFechaNacimiento.getText(),
+						txtAlergias.getText());
+				
+			}
+		});
+		btnGuardar.setBounds(37, 464, 89, 23);
 		contentPane.add(btnGuardar);
+		
+		JLabel lblNewLabel_9 = new JLabel("Id Promotor");
+		lblNewLabel_9.setBounds(207, 454, 66, 14);
+		contentPane.add(lblNewLabel_9);
+		
+		txtIdPromotor = new JTextField();
+		txtIdPromotor.setBounds(199, 483, 86, 20);
+		contentPane.add(txtIdPromotor);
+		txtIdPromotor.setColumns(10);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				cr.delete(Integer.parseInt(txtIdPromotor.getText()));	
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666597_trash_2_icon.png"));
+		btnNewButton.setBounds(319, 454, 89, 60);
+		contentPane.add(btnNewButton);
 	}
 
 }

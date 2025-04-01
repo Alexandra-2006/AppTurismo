@@ -72,6 +72,34 @@ public void create (String Nomb, String Observacion, int Id_TiposMedio) {
 			
 			System.out.println(e.getMessage());
 		}
-		
 }
+
+public void delete(int Id_Medios ) {
+	Connection dbConnection = null;
+	PreparedStatement pst = null; // Preparar la trx
+
+	String scrip = "DELETE FROM tblmedios WHERE Id_Medios = ?";
+	try {
+
+		dbConnection = conector.conectarBD(); // Abrir La Conexion
+		pst = dbConnection.prepareStatement(scrip);// Abrir el Buffer
+
+		// Parametrizar el campo
+		pst.setInt(1,Id_Medios  );
+
+		// Confirmar la operacion
+		int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + Id_Medios + "?");
+
+		if (resp == JOptionPane.OK_OPTION) {
+			// Ejecutar la Trx
+			pst.executeUpdate();
+			JOptionPane.showConfirmDialog(null, "Registro No. " + Id_Medios + "Eliminado");
+		}
+
+	} catch (SQLException e) {
+
+		System.out.println(e.getMessage());
+	}
+}
+
 }
