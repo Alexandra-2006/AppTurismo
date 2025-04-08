@@ -52,6 +52,7 @@ public class JPrincipal extends JFrame {
 		contentPane.setBackground(new Color(184, 134, 11));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		

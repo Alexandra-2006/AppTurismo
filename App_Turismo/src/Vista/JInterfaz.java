@@ -31,7 +31,6 @@ public class JInterfaz extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
