@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class JClientes extends JFrame {
 
@@ -36,6 +37,7 @@ public class JClientes extends JFrame {
 	private JTextField txtTipoDocumento;
 	private JTextField txtIdClientes;
 	Clientes cr = new Clientes ();
+	private JTextField txtConsultar;
 	/**
 	 * Launch the application.
 	 */
@@ -57,8 +59,9 @@ public class JClientes extends JFrame {
 	 */
 	public JClientes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 618, 596);
+		setBounds(100, 100, 618, 721);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(245, 245, 220));
 		contentPane.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -115,7 +118,7 @@ public class JClientes extends JFrame {
 		txtestadocivil.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Tipo Documento");
-		lblNewLabel_1.setBounds(134, 74, 96, 14);
+		lblNewLabel_1.setBounds(27, 51, 96, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Número de Documento");
@@ -155,6 +158,8 @@ public class JClientes extends JFrame {
 		contentPane.add(lblNewLabel_10);
 		
 		btnGuardar = new JButton("Guardar");
+		btnGuardar.setBackground(new Color(255, 215, 0));
+		btnGuardar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666542_save_icon (1)guardar.png"));
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -168,7 +173,7 @@ public class JClientes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnGuardar.setBounds(279, 502, 89, 23);
+		btnGuardar.setBounds(120, 426, 89, 51);
 		contentPane.add(btnGuardar);
 		
 		JLabel lblNewLabel_11 = new JLabel("Gestión de Clientes");
@@ -177,7 +182,7 @@ public class JClientes extends JFrame {
 		contentPane.add(lblNewLabel_11);
 		
 		txtTipoDocumento = new JTextField();
-		txtTipoDocumento.setBounds(129, 99, 86, 20);
+		txtTipoDocumento.setBounds(10, 99, 86, 20);
 		contentPane.add(txtTipoDocumento);
 		txtTipoDocumento.setColumns(10);
 		
@@ -191,6 +196,7 @@ public class JClientes extends JFrame {
 		txtIdClientes.setColumns(10);
 		
 		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBackground(new Color(255, 215, 0));
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -200,5 +206,42 @@ public class JClientes extends JFrame {
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666597_trash_2_icon.png"));
 		btnNewButton.setBounds(479, 463, 89, 57);
 		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel_12 = new JLabel("Consultar");
+		lblNewLabel_12.setBounds(52, 463, 86, 14);
+		contentPane.add(lblNewLabel_12);
+		
+		txtConsultar = new JTextField();
+		txtConsultar.setBounds(39, 503, 86, 20);
+		contentPane.add(txtConsultar);
+		txtConsultar.setColumns(10);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				cr.readOne(Integer.parseInt(txtConsultar.getText()), txtTipoDocumento, txtNumeroDocumento, txtNombres, txtApellidos, txtTelefono, txtCorreo, txtDireccion, txteps, txtAlergias, txtestadocivil);
+			}
+		});
+		btnNewButton_1.setForeground(new Color(0, 0, 0));
+		btnNewButton_1.setBackground(new Color(255, 255, 0));
+		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\9041903_search_icon.png"));
+		btnNewButton_1.setBounds(135, 491, 56, 45);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnActualizar = new JButton("New button");
+		btnActualizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				cr.Update(  Integer.parseInt(txtConsultar.getText()),txtTipoDocumento.getText(), Integer.parseInt(txtNumeroDocumento.getText()) ,  txtNombres.getText(), txtApellidos.getText(), txtTelefono.getText(), txtCorreo.getText(), txtDireccion.getText(),
+						txteps.getText(), txtAlergias.getText(), txtestadocivil.getText());
+			}
+		});
+		btnActualizar.setBackground(new Color(255, 215, 0));
+		btnActualizar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666721_rotate_ccw_icon.png"));
+		btnActualizar.setBounds(135, 547, 74, 44);
+		contentPane.add(btnActualizar);
 	}
 }

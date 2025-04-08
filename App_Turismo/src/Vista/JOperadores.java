@@ -16,6 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class JOperadores extends JFrame {
 
@@ -30,9 +31,12 @@ public class JOperadores extends JFrame {
 	private JTextField txtTelefono;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_8;
-	private JTextField txtIdOperadores;
+	private JTextField txtIdvehiculo;
 	private JButton btnNewButton;
 	Operadores cr = new Operadores();
+	private JLabel lblNewLabel_9;
+	private JTextField txtConsultar;
+	private JButton btnConsultar;
 	/**
 	 * Launch the application.
 	 */
@@ -54,8 +58,9 @@ public class JOperadores extends JFrame {
 	 */
 	public JOperadores() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 542);
+		setBounds(100, 100, 450, 691);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(250, 250, 210));
 		contentPane.addMouseListener(new MouseAdapter() {
 			
 		});
@@ -147,30 +152,66 @@ public class JOperadores extends JFrame {
 		lblNewLabel_4.setBounds(115, 11, 201, 31);
 		contentPane.add(lblNewLabel_4);
 		
-		lblNewLabel_8 = new JLabel("Id Operadores");
+		lblNewLabel_8 = new JLabel("Id Vehiculo");
 		lblNewLabel_8.setBounds(89, 381, 158, 14);
 		contentPane.add(lblNewLabel_8);
 		
-		txtIdOperadores = new JTextField();
-		txtIdOperadores.setBounds(257, 381, 86, 20);
-		contentPane.add(txtIdOperadores);
-		txtIdOperadores.setColumns(10);
+		txtIdvehiculo = new JTextField();
+		txtIdvehiculo.setBounds(257, 381, 86, 20);
+		contentPane.add(txtIdvehiculo);
+		txtIdvehiculo.setColumns(10);
 		
 		btnNewButton = new JButton("New button");
+		btnNewButton.setBackground(new Color(124, 252, 0));
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				 cr.delete(Integer.parseInt(txtIdOperadores.getText()));	
+				 cr.delete(Integer.parseInt(txtConsultar.getText()));	
 			}
 		});
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666597_trash_2_icon.png"));
-		btnNewButton.setBounds(257, 443, 89, 49);
+		btnNewButton.setBounds(247, 466, 56, 49);
 		contentPane.add(btnNewButton);
+		
+		lblNewLabel_9 = new JLabel("Consultar");
+		lblNewLabel_9.setBounds(22, 537, 71, 14);
+		contentPane.add(lblNewLabel_9);
+		
+		txtConsultar = new JTextField();
+		txtConsultar.setBounds(128, 534, 86, 20);
+		contentPane.add(txtConsultar);
+		txtConsultar.setColumns(10);
+		
+		btnConsultar = new JButton("New button");
+		btnConsultar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			cr.readOne(Integer.parseInt(txtConsultar.getText()), txtNombres, txtApellidos, txtCorreo, txtTipoDocumento, txtNumeroDocumento, txtDireccion, txtTelefono,txtIdvehiculo);
+			}
+		});
+		btnConsultar.setBackground(new Color(127, 255, 0));
+		btnConsultar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\9041903_search_icon.png"));
+		btnConsultar.setBounds(247, 524, 71, 41);
+		contentPane.add(btnConsultar);
+		
+		JButton btnActualizar = new JButton("New button");
+		btnActualizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				cr.Update(Integer.parseInt(txtConsultar.getText()), txtNombres.getText(), txtApellidos.getText(), txtCorreo.getText(), txtTipoDocumento.getText(), Integer.parseInt(txtNumeroDocumento.getText()),
+						txtDireccion.getText(), txtTelefono.getText(), Integer.parseInt(txtIdvehiculo.getText()));
+			}
+		});
+		btnActualizar.setBackground(new Color(50, 205, 50));
+		btnActualizar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666721_rotate_ccw_icon.png"));
+		btnActualizar.setBounds(247, 578, 71, 49);
+		contentPane.add(btnActualizar);
 		
 		
 		
 		
 	}
-
 }

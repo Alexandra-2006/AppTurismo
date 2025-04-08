@@ -39,6 +39,9 @@ public class JAgencias extends JFrame {
 	private JLabel lblNewLabel_7;
 	private JTextField txtIdAgencias;
 	Agencias cr = new Agencias ();
+	private JLabel lblNewLabel_8;
+	private JTextField txtConsultar;
+	private JButton btnConsultar;
 	/**
 	 * Launch the application.
 	 */
@@ -60,8 +63,8 @@ public class JAgencias extends JFrame {
 	 */
 	public JAgencias() {
 		setTitle("AGENCIAS");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 615);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 516, 615);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(135, 206, 235));
 		contentPane.setForeground(new Color(245, 255, 250));
@@ -111,6 +114,7 @@ public class JAgencias extends JFrame {
 		contentPane.add(lblNewLabel_5);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666542_save_icon (1)guardar.png"));
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -124,7 +128,7 @@ public class JAgencias extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnGuardar.setBounds(86, 360, 89, 33);
+		btnGuardar.setBounds(137, 293, 71, 54);
 		contentPane.add(btnGuardar);
 		
 		JLabel lblNewLabel_6 = new JLabel("Gestión de Agencias");
@@ -158,7 +162,7 @@ public class JAgencias extends JFrame {
 		
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setForeground(new Color(30, 144, 255));
-		btnNewButton.setBackground(new Color(0, 0, 205));
+		btnNewButton.setBackground(new Color(245, 222, 179));
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -167,7 +171,42 @@ public class JAgencias extends JFrame {
 			}
 		});
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666597_trash_2_icon.png"));
-		btnNewButton.setBounds(268, 433, 89, 63);
+		btnNewButton.setBounds(152, 414, 52, 57);
 		contentPane.add(btnNewButton);
+		
+		lblNewLabel_8 = new JLabel("Consultar");
+		lblNewLabel_8.setBounds(23, 341, 93, 14);
+		contentPane.add(lblNewLabel_8);
+		
+		txtConsultar = new JTextField();
+		txtConsultar.setBounds(7, 371, 109, 20);
+		contentPane.add(txtConsultar);
+		txtConsultar.setColumns(10);
+		
+		btnConsultar = new JButton("New button");
+		btnConsultar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				cr.readOne(Integer.parseInt(txtConsultar.getText()), txtNombre, txtDirección, txtTelefono, txtCorreo, txtWeb, txtIdCompañia);
+				
+			}
+		});
+		btnConsultar.setBackground(new Color(222, 184, 135));
+		btnConsultar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\9041903_search_icon.png"));
+		btnConsultar.setBounds(144, 358, 60, 45);
+		contentPane.add(btnConsultar);
+		
+		JButton btnActualizar = new JButton("New button");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.Update(Integer.parseInt(txtConsultar.getText()),txtNombre.getText(), txtDirección.getText(), txtTelefono.getText(),txtCorreo.getText(), txtWeb.getText(), Integer.parseInt(txtIdCompañia.getText()));
+			}
+		});
+		btnActualizar.setBackground(new Color(253, 245, 230));
+		btnActualizar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666721_rotate_ccw_icon.png"));
+		btnActualizar.setBounds(137, 492, 71, 45);
+		contentPane.add(btnActualizar);
 	}
 }

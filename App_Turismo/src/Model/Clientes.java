@@ -2,9 +2,11 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controller.Conexion;
 
@@ -160,6 +162,97 @@ public class Clientes {
 			System.out.println(e.getMessage());
 		}
 	}
+		
+	
+
+	public void readOne(int IdClientes, JTextField TipoDocumento, JTextField NumeroDocumento, JTextField Nombres ,
+			JTextField Apellidos, JTextField Telefono, JTextField Correo, JTextField Direccion, JTextField eps, JTextField Alergias, JTextField estadocivil) {
+		
+		
+		Connection dbConnection = null;
+		PreparedStatement pst = null; // Preparar la trx
+
+		String scrip = "SELECT *  FROM tblclientes WHERE IdClientes = ?";
+		try {
+
+			dbConnection = conector.conectarBD(); // Abrir La Conexion
+			pst = dbConnection.prepareStatement(scrip);// Abrir el Buffer
+
+			// Parametrizar el campo
+			pst.setInt(1, IdClientes);
+			ResultSet rs = pst.executeQuery();// Almacenamiento temporal
+
+			while (rs.next()) {
+
+				TipoDocumento.setText(rs.getString(2));
+				NumeroDocumento.setText(rs.getString(3));
+				Nombres.setText(rs.getString(4));
+				Apellidos.setText(rs.getString(5));
+				Telefono.setText(rs.getString(6));
+				Correo.setText(rs.getString(7));
+				Direccion.setText(rs.getString(8));
+				eps.setText(rs.getString(9));
+				Alergias.setText(rs.getString(10));
+				estadocivil.setText(rs.getString(11));
+				
+			}
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	public void Update (int IdClientes, String  TipoDocumento, int NumeroDocumento, String Nombres,
+				String Apellidos, String Telefono, String Correo, String Direccion, String eps, String Alergias, String estadocivil) {
+			Connection dbConnection = null;
+			PreparedStatement pst = null; // Preparar la trx
+
+			String scrip = "UPDATE tblclientes SET TipoDocumento = ?, NumeroDocumento = ?, Nombres = ?, Apellidos = ?, Telefono = ?, Correo = ?, Direccion = ?,"
+					+ " eps = ?, Alergias = ?, estadocivil = ? WHERE IdClientes = ?";
+			try {
+
+				dbConnection = conector.conectarBD(); // Abrir La Conexion
+				pst = dbConnection.prepareStatement(scrip);// Abrir el Buffer
+	            
+				
+				pst.setString(1, TipoDocumento);
+				pst.setInt(2, NumeroDocumento);
+				pst.setString(3, Nombres);
+				pst.setString(4, Apellidos);
+				pst.setString(5, Telefono);
+				pst.setString(6, Correo);
+				pst.setString(7, Direccion);
+				pst.setString(8, eps);
+				pst.setString(9, Alergias);
+				pst.setString(10, estadocivil);
+				pst.setInt(11, IdClientes);
+				
+				
+				
+				//Confirmar la operación
+				
+				int resp = JOptionPane.showConfirmDialog(null, "¿Desea actualizar el registro No. " + IdClientes + "?");
+
+				if (resp == JOptionPane.YES_OPTION) {
+					// Ejecutar la Trx
+					pst.executeUpdate();
+					
+					JOptionPane.showConfirmDialog(null, "Registro No. " + +IdClientes + "ACTUALIZADO");
+					
+				}else {
+					
+					JOptionPane.showConfirmDialog(null, "Operación CANCELADA");
+				}
+
+			} catch (SQLException e) {
+
+				System.out.println(e.getMessage());
+			}
+				
+			
+	}
+
 
 }
-	

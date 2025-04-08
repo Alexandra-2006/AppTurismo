@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class JPromotor extends JFrame {
 
@@ -51,8 +53,9 @@ public class JPromotor extends JFrame {
 	 */
 	public JPromotor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 574);
+		setBounds(100, 100, 612, 690);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 240));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -139,6 +142,7 @@ public class JPromotor extends JFrame {
 		contentPane.add(lblNewLabel_8);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666542_save_icon (1)guardar.png"));
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -149,15 +153,15 @@ public class JPromotor extends JFrame {
 				
 			}
 		});
-		btnGuardar.setBounds(37, 464, 89, 23);
+		btnGuardar.setBounds(413, 404, 77, 42);
 		contentPane.add(btnGuardar);
 		
 		JLabel lblNewLabel_9 = new JLabel("Id Promotor");
-		lblNewLabel_9.setBounds(207, 454, 66, 14);
+		lblNewLabel_9.setBounds(291, 525, 111, 14);
 		contentPane.add(lblNewLabel_9);
 		
 		txtIdPromotor = new JTextField();
-		txtIdPromotor.setBounds(199, 483, 86, 20);
+		txtIdPromotor.setBounds(291, 550, 66, 28);
 		contentPane.add(txtIdPromotor);
 		txtIdPromotor.setColumns(10);
 		
@@ -170,8 +174,31 @@ public class JPromotor extends JFrame {
 			}
 		});
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666597_trash_2_icon.png"));
-		btnNewButton.setBounds(319, 454, 89, 60);
+		btnNewButton.setBounds(412, 457, 66, 60);
 		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.readOne(Integer.parseInt(txtIdPromotor.getText()), txtTipoIdentificación, txtNumeroIdentificacion, txtNombres, txtApellidos, txtCorreo, txtTelefono, txtFechaNacimiento, txtAlergias);
+			}
+		});
+		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\9041903_search_icon.png"));
+		btnNewButton_1.setBounds(412, 528, 66, 50);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				cr.Update(Integer.parseInt(txtIdPromotor.getText()),txtTipoIdentificación.getText(), Integer.parseInt(txtNumeroIdentificacion.getText()), txtNombres.getText(), txtApellidos.getText(), txtCorreo.getText(), txtTelefono.getText(), txtFechaNacimiento.getText(),
+						txtAlergias.getText());
+			}
+		});
+		btnActualizar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666721_rotate_ccw_icon.png"));
+		btnActualizar.setBounds(413, 582, 71, 58);
+		contentPane.add(btnActualizar);
 	}
-
 }

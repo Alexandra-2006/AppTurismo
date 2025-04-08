@@ -2,9 +2,11 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controller.Conexion;
 
@@ -126,6 +128,89 @@ public class Compañia {
 				// Ejecutar la Trx
 				pst.executeUpdate();
 				JOptionPane.showConfirmDialog(null, "Registro No. " + Id_Compañia + "Eliminado");
+			}
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
+	}
+		
+	
+
+	public void readOne(int Id_Compañia, JTextField nombre, JTextField direccion, JTextField telefono ,
+			JTextField correo, JTextField FechaCreacion, JTextField Web) {
+		
+		
+		Connection dbConnection = null;
+		PreparedStatement pst = null; // Preparar la trx
+
+		String scrip = "SELECT *  FROM tblcompania WHERE Id_Compañia = ?";
+		try {
+
+			dbConnection = conector.conectarBD(); // Abrir La Conexion
+			pst = dbConnection.prepareStatement(scrip);// Abrir el Buffer
+
+			// Parametrizar el campo
+			pst.setInt(1, Id_Compañia);
+			ResultSet rs = pst.executeQuery();// Almacenamiento temporal
+
+			while (rs.next()) {
+
+				nombre.setText(rs.getString(2));
+				direccion.setText(rs.getString(3));
+				telefono.setText(rs.getString(4));
+				correo.setText(rs.getString(5));
+				FechaCreacion.setText(rs.getString(6));
+				Web.setText(rs.getString(7));
+				
+			}
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+		}
+		
+	}
+
+	public void Update (int Id_Compañia, String  nombre, String direccion, String telefono,
+			String correo, String FechaCreacion, String   Web) {
+		Connection dbConnection = null;
+		PreparedStatement pst = null; // Preparar la trx
+
+		String scrip = "UPDATE tblcompania SET nombre = ?, direccion = ?, telefono = ?, correo = ?, FechaCreacion = ?, Web = ? WHERE Id_Compañia = ?";
+		try {
+
+			dbConnection = conector.conectarBD(); // Abrir La Conexion
+			pst = dbConnection.prepareStatement(scrip);// Abrir el Buffer
+            
+			
+			pst.setString(1, nombre);
+			pst.setString(2, direccion);
+			pst.setString(3, telefono);
+			pst.setString(4, correo);
+			pst.setString(5, FechaCreacion);
+			pst.setString(6, Web);
+			pst.setInt(7, Id_Compañia);
+			
+			
+			
+			//Confirmar la operación
+			
+			int resp = JOptionPane.showConfirmDialog(null, "¿Desea actualizar el registro No. " + Id_Compañia + "?");
+
+			if (resp == JOptionPane.YES_OPTION) {
+				// Ejecutar la Trx
+				pst.executeUpdate();
+				
+				JOptionPane.showConfirmDialog(null, "Registro No. " + +Id_Compañia + "ACTUALIZADO");
+				
+			}else {
+				
+				JOptionPane.showConfirmDialog(null, "Operación CANCELADA");
 			}
 
 		} catch (SQLException e) {
